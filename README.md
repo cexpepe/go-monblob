@@ -115,7 +115,8 @@ For more examples, see [blob_test.go](blob_test.go).
 go test -v
 
 # Fuzz testing (30 seconds)
-go test -fuzz=FuzzParse -fuzztime=30s
+go test -fuzz=^FuzzParse$ -fuzztime=30s
+go test -fuzz=^FuzzParsePrefix$ -fuzztime=30s
 
 # Benchmarks
 go test -bench=. -benchmem
