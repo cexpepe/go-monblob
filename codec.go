@@ -50,7 +50,7 @@ func (r *reader) readUint16(v *uint16) error {
 	if r.off+2 > len(r.data) {
 		return ErrUnexpectedEOF
 	}
-	*v = binary.LittleEndian.Uint16(r.data[r.off:r.off+2])
+	*v = binary.LittleEndian.Uint16(r.data[r.off : r.off+2])
 	r.off += 2
 	return nil
 }
@@ -59,7 +59,7 @@ func (r *reader) readUint32(v *uint32) error {
 	if r.off+4 > len(r.data) {
 		return ErrUnexpectedEOF
 	}
-	*v = binary.LittleEndian.Uint32(r.data[r.off:r.off+4])
+	*v = binary.LittleEndian.Uint32(r.data[r.off : r.off+4])
 	r.off += 4
 	return nil
 }
@@ -68,7 +68,7 @@ func (r *reader) readUint64(v *uint64) error {
 	if r.off+8 > len(r.data) {
 		return ErrUnexpectedEOF
 	}
-	*v = binary.LittleEndian.Uint64(r.data[r.off:r.off+8])
+	*v = binary.LittleEndian.Uint64(r.data[r.off : r.off+8])
 	r.off += 8
 	return nil
 }

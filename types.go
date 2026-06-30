@@ -11,8 +11,8 @@ type Transaction struct {
 // TransactionPrefix holds the non-signature part of a transaction.
 // This is the portion hashed to compute the transaction ID.
 type TransactionPrefix struct {
-	Version    uint64      // Current version is 2
-	UnlockTime uint64      // 0 means immediate unlock (block height or timestamp otherwise)
+	Version    uint64 // Current version is 2
+	UnlockTime uint64 // 0 means immediate unlock (block height or timestamp otherwise)
 	Inputs     []TxIn
 	Outputs    []TxOut
 	Extra      []byte
@@ -40,14 +40,14 @@ type TxInGen struct {
 
 // TxInToKey represents a standard transaction input referencing outputs in the ring.
 type TxInToKey struct {
-	Amount      uint64   // Always 0 in Monero (amounts are hidden)
-	KeyOffsets  []uint64 // Ring member indices as offsets from the global output index
-	KeyImage    [32]byte // Key image to prevent double-spending
+	Amount     uint64   // Always 0 in Monero (amounts are hidden)
+	KeyOffsets []uint64 // Ring member indices as offsets from the global output index
+	KeyImage   [32]byte // Key image to prevent double-spending
 }
 
 // TxOut represents a transaction output.
 type TxOut struct {
-	Amount uint64      // Always 0 in Monero
+	Amount uint64 // Always 0 in Monero
 	Target TxOutTarget
 }
 
@@ -74,7 +74,7 @@ const (
 // The extra section is a TLV (Tag-Length-Value) structure, but the length
 // and format depend on the tag. This struct stores the raw data for flexibility.
 type ExtraField struct {
-	Tag  uint8 // 0x00=padding, 0x01=pubkey, 0x02=nonce, 0x04=additional_pubkeys
+	Tag  uint8  // 0x00=padding, 0x01=pubkey, 0x02=nonce, 0x04=additional_pubkeys
 	Data []byte // Raw data excluding the tag byte
 }
 
@@ -105,6 +105,6 @@ type ExtraAdditionalPubKeys struct {
 
 // ExtraNonce holds the parsed extra nonce data.
 type ExtraNonce struct {
-	Tag  uint8 // Sub-tag (e.g., ExtraNonceTagPaymentID)
+	Tag  uint8  // Sub-tag (e.g., ExtraNonceTagPaymentID)
 	Data []byte // Raw data corresponding to the sub-tag
 }

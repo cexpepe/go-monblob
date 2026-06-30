@@ -69,38 +69,38 @@ func TestParseKnownTransaction(t *testing.T) {
 
 // TestParsePrefix tests parsing only the transaction prefix.
 func TestParsePrefix(t *testing.T) {
-    data := loadTestTransaction(t)
+	data := loadTestTransaction(t)
 
-    prefix, err := ParsePrefix(data)
-    if err != nil {
-        t.Fatalf("ParsePrefix failed: %v", err)
-    }
+	prefix, err := ParsePrefix(data)
+	if err != nil {
+		t.Fatalf("ParsePrefix failed: %v", err)
+	}
 
-    if prefix.Version != 2 {
-        t.Errorf("expected version 2, got %d", prefix.Version)
-    }
+	if prefix.Version != 2 {
+		t.Errorf("expected version 2, got %d", prefix.Version)
+	}
 
-    // Verify that prefix has at least one input and one output
-    if len(prefix.Inputs) == 0 {
-        t.Error("expected at least one input")
-    }
-    if len(prefix.Outputs) == 0 {
-        t.Error("expected at least one output")
-    }
+	// Verify that prefix has at least one input and one output
+	if len(prefix.Inputs) == 0 {
+		t.Error("expected at least one input")
+	}
+	if len(prefix.Outputs) == 0 {
+		t.Error("expected at least one output")
+	}
 
-    // Optionally, verify that the serialized prefix is a prefix of the full blob
-    // but we skip byte comparison because Extra is stored as raw bytes and may
-    // include trailing data in our simplified implementation.
-    // Instead, we just check that serialization does not error.
-    prefixBytes, err := SerializePrefix(prefix)
-    if err != nil {
-        t.Fatalf("SerializePrefix failed: %v", err)
-    }
-    // Ensure the serialized length is <= original data length
-    if len(prefixBytes) > len(data) {
-        t.Errorf("serialized prefix length %d exceeds full blob length %d",
-            len(prefixBytes), len(data))
-    }
+	// Optionally, verify that the serialized prefix is a prefix of the full blob
+	// but we skip byte comparison because Extra is stored as raw bytes and may
+	// include trailing data in our simplified implementation.
+	// Instead, we just check that serialization does not error.
+	prefixBytes, err := SerializePrefix(prefix)
+	if err != nil {
+		t.Fatalf("SerializePrefix failed: %v", err)
+	}
+	// Ensure the serialized length is <= original data length
+	if len(prefixBytes) > len(data) {
+		t.Errorf("serialized prefix length %d exceeds full blob length %d",
+			len(prefixBytes), len(data))
+	}
 }
 
 // TestHash computes the transaction ID and verifies it is 32 bytes.
@@ -124,9 +124,9 @@ func TestHash(t *testing.T) {
 // TestParseInvalidData tests that parsing random data returns an error without panic.
 func TestParseInvalidData(t *testing.T) {
 	invalid := [][]byte{
-		{},                           // empty
-		{0x01},                       // too short for version
-		{0x01, 0x02, 0x03},          // incomplete
+		{},                 // empty
+		{0x01},             // too short for version
+		{0x01, 0x02, 0x03}, // incomplete
 		//make([]byte, 1000),          // all zeros (can be parsed as valid empty tx, so skip)
 		[]byte("this is not binary"), // arbitrary
 	}
