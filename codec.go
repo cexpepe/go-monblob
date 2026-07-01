@@ -209,22 +209,23 @@ func (w *writer) bytes() []byte {
 // ==================== Decoding ====================
 
 func (tx *Transaction) decode(r *reader) error {
-	if err := r.checkDepth(); err != nil {
-		return err
-	}
-	defer func() { r.depth-- }()
+    if err := r.checkDepth(); err != nil {
+        return err
+    }
+    defer func() { r.depth-- }()
 
-	if err := tx.Prefix.decode(r); err != nil {
-		return err
-	}
+    if err := tx.Prefix.decode(r); err != nil {
+        return err
+    }
 
-	remaining := r.data[r.off:]
-	if len(remaining) > MaxSignatureSize {
-		return ErrMaxSliceSize
-	}
-	tx.Signatures = [][]byte{remaining}
-	r.off = len(r.data)
-	return nil
+    // Everything after prefix is the signature block
+    remaining := r.data[r.off:]
+    if len(remaining) > MaxSignatureSize {
+        return ErrMaxSliceSize
+    }
+    tx.Signatures = append([]byte(nil), remaining...)
+    r.off = len(r.data)
+    return nil
 }
 
 func (p *TransactionPrefix) decode(r *reader) error {
@@ -342,15 +343,13 @@ func (t *TxOutTarget) decode(r *reader) error {
 // ==================== Encoding ====================
 
 func (tx *Transaction) encode(w *writer) error {
-	if err := tx.Prefix.encode(w); err != nil {
-		return err
-	}
-	if len(tx.Signatures) > 0 {
-		if err := w.writeFixedBytes(tx.Signatures[0]); err != nil {
-			return err
-		}
-	}
-	return nil
+    if err := tx.Prefix.encode(w); err != nil {
+        return err
+    }
+    if err := w.writeFixedBytes(tx.Signatures); err != nil {
+        return err
+    }
+    return nil
 }
 
 func (p *TransactionPrefix) encode(w *writer) error {

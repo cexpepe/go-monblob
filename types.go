@@ -5,7 +5,7 @@ package monblob
 // Transaction represents a complete Monero transaction with its prefix and signatures.
 type Transaction struct {
 	Prefix     TransactionPrefix
-	Signatures [][]byte // Each input contributes one signature group (ring signature or generation signature)
+	Signatures []byte // raw signature/RingCT block
 }
 
 // TransactionPrefix holds the non-signature part of a transaction.
