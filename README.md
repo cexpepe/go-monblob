@@ -7,7 +7,6 @@
 [![codecov](https://codecov.io/gh/cexpepe/go-monblob/branch/main/graph/badge.svg)](https://codecov.io/gh/cexpepe/go-monblob)
 [![Go Version](https://img.shields.io/github/go-mod/go-version/cexpepe/go-monblob)](https://go.dev/)
 [![License](https://img.shields.io/github/license/cexpepe/go-monblob)](LICENSE)
-[![Go Report Card](https://goreportcard.com/badge/github.com/cexpepe/go-monblob)](https://goreportcard.com/report/github.com/cexpepe/go-monblob)
 
 **go-monblob** is a pure Go, zero-dependency library for parsing and serializing Monero transaction binary blobs (`tx_blob`). It follows [CNS003](https://cryptonote.org/cns/cns003.txt) and Monero v0.18+ specifications, adopting a strategy of “precise prefix parsing + raw signature retention” to support all transaction versions (V1/V2) and all RingCT types (0–5).
 
