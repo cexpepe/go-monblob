@@ -4,6 +4,7 @@
   <img src="images/logo.jpg" alt="go-monblob logo" width="200"/>
 </div>
 
+[![codecov](https://codecov.io/gh/cexpepe/go-monblob/branch/main/graph/badge.svg)](https://codecov.io/gh/cexpepe/go-monblob)
 [![Go Version](https://img.shields.io/github/go-mod/go-version/cexpepe/go-monblob)](https://go.dev/)
 [![License](https://img.shields.io/github/license/cexpepe/go-monblob)](LICENSE)
 [![Go Report Card](https://goreportcard.com/badge/github.com/cexpepe/go-monblob)](https://goreportcard.com/report/github.com/cexpepe/go-monblob)
