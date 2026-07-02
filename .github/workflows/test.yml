@@ -14,4 +14,10 @@ jobs:
       - run: go test -fuzz=^FuzzParsePrefix$ -fuzztime=10s
       - run: go test -bench=. -benchmem ./...
       - run: go test -coverprofile=coverage.out ./...
-      - uses: codecov/codecov-action@v4
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage.out
+          flags: unittests
+          fail_ci_if_error: false
